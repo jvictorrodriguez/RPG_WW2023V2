@@ -8,13 +8,13 @@ public interface Attacker {
     int subtractEnergy = 5;
     int addEnergy = 1;
 
-    private Statistics attack(Attacker defendant) {
+    default Statistics attack(Attacker defendant) {
 
         int damage;
         AttackType attackType;
         if (getPowerHitFromAttacker() >= requiredEnergyToHeavyAttack) {
             attackType = AttackType.HEAVY_ATTACK;
-            damage = getPowerHitFromAttacker();
+            damage = getEnergyHeavyAttackFromAttacker();
             decreaseEnergyAttacker(subtractEnergy);
 
         } else {
@@ -22,6 +22,7 @@ public interface Attacker {
             damage = getEnergyWeakAttackFromAttacker();
             increaseEnergyAttacker(addEnergy);
         }
+
         defendant.decreaseHpDefendant(damage);
         return new Statistics(this, defendant, attackType, damage, defendant.getHp());
     }
@@ -30,6 +31,7 @@ public interface Attacker {
     int getPowerHitFromAttacker();
 
     int getEnergyWeakAttackFromAttacker();
+    int getEnergyHeavyAttackFromAttacker();
 
     int getHp();
 

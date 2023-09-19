@@ -53,6 +53,11 @@ public class Wizard extends Character{
         return 1;
     }
 
+    @Override
+    public int getEnergyHeavyAttackFromAttacker() {
+        return getIntelligence();
+    }
+
     // ********* IMPLEMENTATIONS setter ATTACKER *********
 
     @Override
@@ -60,6 +65,8 @@ public class Wizard extends Character{
         if (hp<damage){
             hp=0;
             setAlive(false);
+        }else{
+            hp-=damage;
         }
     }
 

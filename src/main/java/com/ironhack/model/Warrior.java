@@ -48,6 +48,11 @@ public class Warrior extends Character{
         return (int)strength/2;
     }
 
+    @Override
+    public int getEnergyHeavyAttackFromAttacker() {
+        return getStrength();
+    }
+
     // ********* IMPLEMENTATIONS setter ATTACKER *********
 
     @Override
@@ -55,6 +60,8 @@ public class Warrior extends Character{
         if (hp<damage){
             hp=0;
             setAlive(false);
+        }else{
+            hp-=damage;
         }
     }
 
