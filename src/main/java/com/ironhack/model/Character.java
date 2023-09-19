@@ -1,10 +1,10 @@
 package com.ironhack.model;
 
-public abstract class Character {
+public abstract class Character implements Attacker{
     private static int idCounter=1;
     private final int id;
     private String name;
-    private int hp;
+    protected int hp;
     private boolean isAlive;
 
 

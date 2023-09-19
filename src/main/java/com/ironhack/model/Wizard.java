@@ -8,6 +8,7 @@ public class Wizard extends Character{
     public final static int WIZARD_MAX_INTELLIGENCE=50;
     public final static int WIZARD_MIN_INTELLIGENCE=1;
 
+
     private int mana;
     private int intelligence;
 
@@ -40,6 +41,37 @@ public class Wizard extends Character{
         this.intelligence = intelligence;
     }
 
+
+    // ********* IMPLEMENTATIONS getter ATTACKER *********
+    @Override
+    public int getPowerHitFromAttacker() {
+        return getMana();
+    }
+
+    @Override
+    public int getEnergyWeakAttackFromAttacker() {
+        return 1;
+    }
+
+    // ********* IMPLEMENTATIONS setter ATTACKER *********
+
+    @Override
+    public void decreaseHpDefendant(int damage) {
+        if (hp<damage){
+            hp=0;
+            setAlive(false);
+        }
+    }
+
+    @Override
+    public void increaseEnergyAttacker(int addEnergy) {
+        mana+=addEnergy;
+    }
+
+    @Override
+    public void decreaseEnergyAttacker(int subtractEnergy) {
+        mana = mana > subtractEnergy ? mana-subtractEnergy : 0;
+    }
     // ********* TO STRING *********
 
     @Override

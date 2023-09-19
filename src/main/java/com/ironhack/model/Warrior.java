@@ -19,24 +19,54 @@ public class Warrior extends Character{
         this.stamina = stamina;
         this.strength = strength;
     }
-    // ********* GETTERS *********
-
-    public int getStamina() {
-        return stamina;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
 
     // ********* SETTERS *********
-
     public void setStamina(int stamina) {
         this.stamina = stamina;
     }
 
     public void setStrength(int strength) {
         this.strength = strength;
+    }
+    // ********* GETTERS *********
+
+    public int getStamina() {
+        return stamina;
+    }
+    public int getStrength() {
+        return strength;
+    }
+
+    // ********* IMPLEMENTATIONS getter ATTACKER *********
+    @Override
+    public int getPowerHitFromAttacker() {
+        return getStamina();
+    }
+
+    @Override
+    public int getEnergyWeakAttackFromAttacker() {
+        return (int)strength/2;
+    }
+
+    // ********* IMPLEMENTATIONS setter ATTACKER *********
+
+    @Override
+    public void decreaseHpDefendant(int damage) {
+        if (hp<damage){
+            hp=0;
+            setAlive(false);
+        }
+    }
+
+    @Override
+    public void increaseEnergyAttacker(int addEnergy) {
+        stamina+=addEnergy;
+    }
+
+
+    @Override
+    public void decreaseEnergyAttacker(int substractEnergy) {
+        stamina = stamina> substractEnergy ? stamina-substractEnergy : 0;
     }
 
     // ********* TO STRING *********
@@ -48,4 +78,6 @@ public class Warrior extends Character{
                 ", strength=" + strength +
                 "} " + super.toString();
     }
+
+
 }
