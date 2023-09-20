@@ -1,5 +1,6 @@
 package com.ironhack.model;
 
+import com.ironhack.exceptions.IncorrectValuesException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ class AttackerTest {
     Warrior warrior1Attack, warrior2Defendant;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws IncorrectValuesException {
         warrior1Attack = new Warrior("Warrior1", 150, 25,5);
         warrior2Defendant = new Warrior("Warrior1", 150, 25,5);
 

@@ -1,6 +1,8 @@
 package com.ironhack.model;
 
-public class Warrior extends Character{
+import com.ironhack.exceptions.IncorrectValuesException;
+
+public class Warrior extends Character {
     final static int STAMINA_MAX = 50;
     final static int STAMINA_MIN = 10;
     final static int STRENGTH_MAX = 10;
@@ -14,25 +16,31 @@ public class Warrior extends Character{
     public Warrior() {
     }
 
-    public Warrior(String name, int hp, int stamina, int strength) {
+    public Warrior(String name, int hp, int stamina, int strength) throws IncorrectValuesException {
         super(name, hp);
-        this.stamina = stamina;
-        this.strength = strength;
+        setStamina(stamina);
+        setStrength(strength);
     }
 
     // ********* SETTERS *********
-    public void setStamina(int stamina) {
+    public void setStamina(int stamina) throws IncorrectValuesException {
+        if (stamina < STAMINA_MIN  || STAMINA_MAX < stamina) {
+            throw new IncorrectValuesException(this,"Value for Stamina incorrect");
+        }
         this.stamina = stamina;
     }
 
-    public void setStrength(int strength) {
-        this.strength = strength;
+    public void setStrength(int strength) throws IncorrectValuesException {
+        if (strength< STRENGTH_MIN || STRENGTH_MAX < strength)
+            throw new IncorrectValuesException(this,"Value for Strength incorrect");
+            this.strength = strength;
     }
     // ********* GETTERS *********
 
     public int getStamina() {
         return stamina;
     }
+
     public int getStrength() {
         return strength;
     }
@@ -45,7 +53,7 @@ public class Warrior extends Character{
 
     @Override
     public int getEnergyWeakAttackFromAttacker() {
-        return (int)strength/2;
+        return (int) strength / 2;
     }
 
     @Override
@@ -57,23 +65,23 @@ public class Warrior extends Character{
 
     @Override
     public void decreaseHpDefendant(int damage) {
-        if (hp<damage){
-            hp=0;
+        if (hp < damage) {
+            hp = 0;
             setAlive(false);
-        }else{
-            hp-=damage;
+        } else {
+            hp -= damage;
         }
     }
 
     @Override
     public void increaseEnergyAttacker(int addEnergy) {
-        stamina+=addEnergy;
+        stamina += addEnergy;
     }
 
 
     @Override
     public void decreaseEnergyAttacker(int substractEnergy) {
-        stamina = stamina> substractEnergy ? stamina-substractEnergy : 0;
+        stamina = stamina > substractEnergy ? stamina - substractEnergy : 0;
     }
 
     // ********* TO STRING *********
