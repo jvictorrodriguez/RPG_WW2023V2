@@ -3,6 +3,9 @@ package com.ironhack.model;
 import com.ironhack.exceptions.IncorrectValuesException;
 
 public class Wizard extends Character {
+    protected final static String E_HP="❤️";
+    protected final static String E_INTELLIGENCE="🧠";
+    protected final static String E_MANA="🪄";
     public final static int HP_MAX = 100;
     public final static int HP_MIN = 50;
     public final static int MANA_MAX = 50;
@@ -90,13 +93,20 @@ public class Wizard extends Character {
     public void decreaseEnergyAttacker(int subtractEnergy) {
         mana = mana > subtractEnergy ? mana - subtractEnergy : 0;
     }
+
+
     // ********* TO STRING *********
 
     @Override
     public String toString() {
-        return "\nWizard{" +
+        return super.toString() + "Wizard{" +
                 "mana=" + mana +
                 ", intelligence=" + intelligence +
-                "} " + super.toString();
+                "} ";
+    }
+    @Override
+    public void print() {
+        System.out.printf("\nWizard:  %-20s HP: %8s%S  Intelligence: %8s%S    Mana:    %5s%S\n",
+                getName(),getHp(), E_HP, getIntelligence(),E_INTELLIGENCE, getMana(), E_MANA);
     }
 }

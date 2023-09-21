@@ -3,6 +3,10 @@ package com.ironhack.model;
 import com.ironhack.exceptions.IncorrectValuesException;
 
 public class Warrior extends Character {
+    protected final static String E_HP="❤️";
+    protected final static String E_STRENGTH="💪";
+    protected final static String E_STAMINA="🪫";
+
     final static int STAMINA_MAX = 50;
     final static int STAMINA_MIN = 10;
     final static int STRENGTH_MAX = 10;
@@ -94,11 +98,14 @@ public class Warrior extends Character {
 
     @Override
     public String toString() {
-        return "\nWarrior{" +
+        return super.toString() + "Warrior{" +
                 "stamina=" + stamina +
                 ", strength=" + strength +
-                "} " + super.toString();
+                "} ";
     }
 
-
+    public void print() {
+        System.out.printf("\nWarrior: %-20s HP: %8s%s  Strength:     %8s %S    Stamina: %5s%S\n",
+                getName(), getHp(), E_HP,getStrength(),E_STRENGTH, getStamina(),E_STAMINA);
+    }
 }

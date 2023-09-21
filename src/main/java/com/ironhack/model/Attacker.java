@@ -41,6 +41,7 @@ public interface Attacker {
     void increaseEnergyAttacker(int addEnergy);
 
     void decreaseEnergyAttacker(int subtractEnergy);
+    void print();
 
 
 }
