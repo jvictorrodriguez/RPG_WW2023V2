@@ -71,10 +71,11 @@ public class GameService {
                 Question question = questionList.get(idQuestion);
                 //Asks the question
                 Input.getInput(question);
+
                 //Checks the answer if the user doesn't type "BACK"
                 if (!question.getAnswer().toString().equalsIgnoreCase("BACK")) {
                     boolean isACorrectAnswer = question.getPredicate().test(question.getAnswer());
-                    idQuestion++;
+                    if (isACorrectAnswer) idQuestion++;
                 }else if (idQuestion>0){
                     idQuestion--;
                 }else if(idQuestion==0 && i>0){
