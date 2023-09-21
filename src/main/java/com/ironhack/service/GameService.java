@@ -1,19 +1,22 @@
 package com.ironhack.service;
 
+import com.ironhack.enums.Type;
 import com.ironhack.model.*;
+import com.ironhack.utils.Input;
+import com.ironhack.utils.Question;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
+
 
 public class GameService {
 
 
     private final static int numberOfCharactersByTeam = 3;
     private static Locale idiomaActual = new Locale("es", "ES");
-//    private static ResourceBundle mensajes = ResourceBundle.getBundle("mensajes", idiomaActual);
-
+    //    private static Locale idiomaEnglish = Locale.ENGLISH;
+//        private static ResourceBundle mensajes = ResourceBundle.getBundle("mensajes", idiomaActual);
+//        private static ResourceBundle mensajes = ResourceBundle.getBundle("mensajes", idiomaEnglish);
+    static List<Question> questionList = new ArrayList<>();
 
     static List<Statistics> statisticsList = new ArrayList<>();
 
@@ -21,10 +24,13 @@ public class GameService {
     public static void setUpGame() {
         Team teamOne, teamTwo;
 
+
         //Creates the teams
         teamOne = new Team("Team A");
         teamTwo = new Team("Team B");
 
+        //Create questions
+        createQuestions();
 
         fillTeamCustomized(teamOne);
 
@@ -42,13 +48,47 @@ public class GameService {
         fight(teamOne, teamTwo);
     }
 
+    private static void createQuestions() {
+        Question<String> name = new Question<>("inputName", Type.STRING);
+        name.addPredicate(word -> word.length() > 0);
+        name.addPredicate(word -> word.length() <= 10);
+        questionList.add(name);
+
+        Question<Integer> optionPlayer = new Question<>("optionPlayer", Type.INTEGER);
+        optionPlayer.addPredicate(option -> option > 0);
+        optionPlayer.addPredicate(option -> option <= 3);
+        questionList.add(optionPlayer);
+
+    }
+
     private static void fillTeamCustomized(Team teamOne) {
 
         for (int i = 0; i < numberOfCharactersByTeam; i++) {
-            Questions name = new Questions("Input a name for the Attacker");
+            int idQuestion = 0;
+            do {
+                System.out.println("Attacker "+(i+1));
+                //Takes the question from the questionList
+                Question question = questionList.get(idQuestion);
+                //Asks the question
+                Input.getInput(question);
+                //Checks the answer if the user doesn't type "BACK"
+                if (!question.getAnswer().toString().equalsIgnoreCase("BACK")) {
+                    boolean isACorrectAnswer = question.getPredicate().test(question.getAnswer());
+                    idQuestion++;
+                }else if (idQuestion>0){
+                    idQuestion--;
+                }else if(idQuestion==0 && i>0){
+                    i--;
+                }
+            } while (idQuestion< questionList.size());
 
+
+
+
+            }
         }
-    }
+
+
 
     private static void fillTeamWithRandomAttackers(Team team) {
         //Fill the team with attackers
