@@ -19,12 +19,11 @@ public class Statistics {
 
     @Override
     public String toString() {
-        return "Statistics{" +
-                "attacker=" + attacker +
-                ", defendant=" + defendant +
-                ", attackType=" + attackType +
+        return "\n***********************" +
+                "\nAttacker=" + attacker.getName() +
+                "\nDefendant=" + defendant.getName() +
+                "\nattackType=" + attackType +
                 ", levelAttack=" + levelAttack +
-                ", hpDefendant=" + hpDefendant +
-                '}';
+                ", hpDefendant=" + hpDefendant;
     }
 }

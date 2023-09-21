@@ -32,4 +32,12 @@ public class Team {
     public void removeAttacker(Attacker attacker) {
         attackerList.remove(attacker);
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "teamName='" + teamName + '\'' +
+                ", attackerList=" + attackerList +
+                '}';
+    }
 }

@@ -12,7 +12,7 @@ public interface Attacker {
 
         int damage;
         AttackType attackType;
-        if (getPowerHitFromAttacker() >= requiredEnergyToHeavyAttack) {
+        if (getEnergyFromAttacker() >= requiredEnergyToHeavyAttack) {
             attackType = AttackType.HEAVY_ATTACK;
             damage = getEnergyHeavyAttackFromAttacker();
             decreaseEnergyAttacker(subtractEnergy);
@@ -27,13 +27,14 @@ public interface Attacker {
         return new Statistics(this, defendant, attackType, damage, defendant.getHp());
     }
 
-
-    int getPowerHitFromAttacker();
+    String getName();
+    int getEnergyFromAttacker();
 
     int getEnergyWeakAttackFromAttacker();
     int getEnergyHeavyAttackFromAttacker();
 
     int getHp();
+    boolean isAlive();
 
     void decreaseHpDefendant(int damage);
 

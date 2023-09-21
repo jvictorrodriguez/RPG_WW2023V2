@@ -24,16 +24,22 @@ public class Warrior extends Character {
 
     // ********* SETTERS *********
     public void setStamina(int stamina) throws IncorrectValuesException {
-        if (stamina < STAMINA_MIN  || STAMINA_MAX < stamina) {
-            throw new IncorrectValuesException(this,"Value for Stamina incorrect");
+        if (stamina < STAMINA_MIN || STAMINA_MAX < stamina) {
+            throw new IncorrectValuesException(this, "Value for Stamina incorrect");
         }
         this.stamina = stamina;
     }
 
     public void setStrength(int strength) throws IncorrectValuesException {
-        if (strength< STRENGTH_MIN || STRENGTH_MAX < strength)
-            throw new IncorrectValuesException(this,"Value for Strength incorrect");
-            this.strength = strength;
+        if (strength < STRENGTH_MIN || STRENGTH_MAX < strength)
+            throw new IncorrectValuesException(this, "Value for Strength incorrect");
+        this.strength = strength;
+    }
+
+    public void setHp(int hp) throws IncorrectValuesException {
+        if (hp < HP_MIN || HP_MAX < hp)
+            throw new IncorrectValuesException(this, "Value for HP incorrect");
+        super.setHp(hp);
     }
     // ********* GETTERS *********
 
@@ -47,7 +53,7 @@ public class Warrior extends Character {
 
     // ********* IMPLEMENTATIONS getter ATTACKER *********
     @Override
-    public int getPowerHitFromAttacker() {
+    public int getEnergyFromAttacker() {
         return getStamina();
     }
 
@@ -88,7 +94,7 @@ public class Warrior extends Character {
 
     @Override
     public String toString() {
-        return "Warrior{" +
+        return "\nWarrior{" +
                 "stamina=" + stamina +
                 ", strength=" + strength +
                 "} " + super.toString();
