@@ -49,19 +49,25 @@ public class GameService {
     }
 
     private static void createQuestions() {
+        //Stores the questions, type of the answer(String or Integer)
+        // and messages for bad answers and predicates in Question class
+
         Question<String> name = new Question<>("inputName", Type.STRING);
         name.addPredicate(word -> word.length() > 0);
         name.addPredicate(word -> word.length() <= 10);
+        name.setErrorMessage("NameLengthBetween0and10");
         questionList.add(name);
 
         Question<Integer> optionPlayer = new Question<>("optionPlayer", Type.INTEGER);
         optionPlayer.addPredicate(option -> option > 0);
         optionPlayer.addPredicate(option -> option <= 3);
+        optionPlayer.setErrorMessage("InputANumberBetweenTheValues");
         questionList.add(optionPlayer);
 
     }
 
     private static void fillTeamCustomized(Team teamOne) {
+
 
         for (int i = 0; i < numberOfCharactersByTeam; i++) {
             int idQuestion = 0;
@@ -73,17 +79,26 @@ public class GameService {
                 Input.getInput(question);
 
                 //Checks the answer if the user doesn't type "BACK"
-                if (!question.getAnswer().toString().equalsIgnoreCase("BACK")) {
-                    boolean isACorrectAnswer = question.getPredicate().test(question.getAnswer());
-                    if (isACorrectAnswer) idQuestion++;
-                }else if (idQuestion>0){
-                    idQuestion--;
-                }else if(idQuestion==0 && i>0){
-                    i--;
+                //And adjusts the idQuestion and i counter
+                if (!question.getAnswer().toString().equalsIgnoreCase("BACK"))
+                {
+                    idQuestion++;
+                }
+                //If the answer is BACK
+                else {
+                    //Goes back 1 question
+                    if (idQuestion>0)   idQuestion--;
+                    //Goes back to previous attacker
+                    //and to the last question
+                    else if (idQuestion==0 && i>0){
+                        idQuestion=questionList.size()-1;
+                        i--;
+                    }
                 }
             } while (idQuestion< questionList.size());
 
-
+//                    boolean isACorrectAnswer = question.getPredicate().test(question.getAnswer());
+//                    if (isACorrectAnswer)
 
 
             }

@@ -8,6 +8,7 @@ public class Question <T>{
     private String question;
     private Type type;
     private T answer;
+    private String errorMessage;
     private Predicate<T> predicate;
 
     //***** CONSTRUCTOR ****
@@ -33,6 +34,10 @@ public class Question <T>{
         return answer;
     }
 
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
     public Predicate<T> getPredicate() {
         return predicate;
     }
@@ -50,6 +55,11 @@ public class Question <T>{
     public void setAnswer(T answer) {
         this.answer = answer;
     }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
     //***** OTHER METHODS ****
     public void addPredicate(Predicate <T> predicate) {
         if (this.predicate==null)
