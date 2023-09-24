@@ -6,7 +6,6 @@ import com.ironhack.utils.color.Formato;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import static com.ironhack.utils.color.Coloreando.*;
@@ -19,55 +18,80 @@ public class Console {
     public final static int DELAY = 10;
 
 
-
     public static void main(String[] args) {
         clear();
         print(ROJO, Titles.warriorsWizards(), DELAY);
+        createAllQuestions();
+        loadToListAllQuestions();
 
 
+//        selectModeGame();
+//        setUpTeamA();
+//        questionsKeyList.add("modeGame");
+//        questionsKeyList.add("howToCreateTheTeam");
 
-        selectModeGame();
-        setUpTeamA();
-        questionsKeyList.add("modeGame");
-        questionsKeyList.add("howToCreateTheTeam");
 
-
-        int idQuestion=0;
+        int idQuestion = 0;
         String answer;
-        do{
-            String getQuestionKeyFromQuestionKeyList= questionsKeyList.get(idQuestion);
-            Question questionToAsk= questionsHashMap.get(getQuestionKeyFromQuestionKeyList);
-            answer= Input.getInput(questionToAsk);
+        do {
+            String getQuestionKeyFromQuestionKeyList = questionsKeyList.get(idQuestion);
+            Question questionToAsk = questionsHashMap.get(getQuestionKeyFromQuestionKeyList);
+            answer = Input.getInput(questionToAsk);
             if (answer.equalsIgnoreCase("EXIT")) break;
-            if (answer.equalsIgnoreCase("BACK") && idQuestion>0) idQuestion--;
+            if (answer.equalsIgnoreCase("BACK") && idQuestion > 0) idQuestion--;
             else idQuestion++;
 
-        }while (idQuestion<questionsKeyList.size());
-
-
-
+        } while (idQuestion < questionsKeyList.size());
 
 
     }
 
-    public static void selectModeGame() {
+    private static void loadToListAllQuestions() {
+        questionsKeyList.add("modeGame");
+        questionsKeyList.add("howToCreateTheTeam");
+
+    }
+
+    public static void createAllQuestions() {
+        //SelectModeGame
         Question<Integer> modeGame = new Question("SelectModeGame", Type.INTEGER);
         modeGame.addAnswerOptions("HumanVsHuman");
         modeGame.addAnswerOptions("HumanVsCPU");
         modeGame.addAnswerOptions("CPUVsCPU");
         modeGame.addPredicate(option -> option > 0);
-        modeGame.addPredicate(option -> option < modeGame.getOptions().size());
+        modeGame.addPredicate(option -> option < modeGame.getOptions().size()+1);
         questionsHashMap.put("modeGame", modeGame);
-    }
 
-    private static void setUpTeamA() {
+        //HowToCreateTheTeam
         Question<Integer> howToCreateTheTeam = new Question<>("howToCreateTheTeam", Type.INTEGER);
         howToCreateTheTeam.addAnswerOptions("CustomizedByYou");
         howToCreateTheTeam.addAnswerOptions("Random");
         howToCreateTheTeam.addAnswerOptions("ImportFromFile");
         howToCreateTheTeam.addPredicate(option -> option > 0);
-        howToCreateTheTeam.addPredicate(option -> option < howToCreateTheTeam.getOptions().size());
+        howToCreateTheTeam.addPredicate(option -> option < howToCreateTheTeam.getOptions().size()+1);
         questionsHashMap.put("howToCreateTheTeam", howToCreateTheTeam);
+
+
+    }
+
+    public static void selectModeGame() {
+//        Question<Integer> modeGame = new Question("SelectModeGame", Type.INTEGER);
+//        modeGame.addAnswerOptions("HumanVsHuman");
+//        modeGame.addAnswerOptions("HumanVsCPU");
+//        modeGame.addAnswerOptions("CPUVsCPU");
+//        modeGame.addPredicate(option -> option > 0);
+//        modeGame.addPredicate(option -> option < modeGame.getOptions().size());
+//        questionsHashMap.put("modeGame", modeGame);
+    }
+
+    private static void setUpTeamA() {
+//        Question<Integer> howToCreateTheTeam = new Question<>("howToCreateTheTeam", Type.INTEGER);
+//        howToCreateTheTeam.addAnswerOptions("CustomizedByYou");
+//        howToCreateTheTeam.addAnswerOptions("Random");
+//        howToCreateTheTeam.addAnswerOptions("ImportFromFile");
+//        howToCreateTheTeam.addPredicate(option -> option > 0);
+//        howToCreateTheTeam.addPredicate(option -> option < howToCreateTheTeam.getOptions().size());
+//        questionsHashMap.put("howToCreateTheTeam", howToCreateTheTeam);
     }
 
     public static void clear() {
