@@ -2,8 +2,10 @@ package com.ironhack.service;
 
 import com.ironhack.enums.Type;
 import com.ironhack.model.*;
+import com.ironhack.utils.Console;
 import com.ironhack.utils.Input;
 import com.ironhack.utils.Question;
+import com.ironhack.utils.Titles;
 
 import java.util.*;
 
@@ -24,6 +26,9 @@ public class GameService {
     public static void setUpGame() {
         Team teamOne, teamTwo;
 
+
+        Console.clear();
+        System.out.println(Titles.warriorsWizards());
 
         //Creates the teams
         teamOne = new Team("Team A");
@@ -59,6 +64,7 @@ public class GameService {
         questionList.add(name);
 
         Question<Integer> optionPlayer = new Question<>("optionPlayer", Type.INTEGER);
+
         optionPlayer.addPredicate(option -> option > 0);
         optionPlayer.addPredicate(option -> option <= 3);
         optionPlayer.setErrorMessage("InputANumberBetweenTheValues");

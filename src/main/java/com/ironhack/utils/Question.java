@@ -2,19 +2,19 @@ package com.ironhack.utils;
 
 import com.ironhack.enums.Type;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 public class Question <T>{
     private String question;
     private Type type;
+    private List<String> options= new ArrayList<>();
     private T answer;
-    private String errorMessage;
+    private String errorMessage="BadAnswer";
     private Predicate<T> predicate;
 
     //***** CONSTRUCTOR ****
-    public Question(String question) {
-        this.question = question;
-    }
 
     public Question(String question, Type type) {
         this.question = question;
@@ -25,7 +25,6 @@ public class Question <T>{
     public String getQuestion() {
         return question;
     }
-
     public Type getType() {
         return type;
     }
@@ -42,7 +41,11 @@ public class Question <T>{
         return predicate;
     }
 
-    //***** SETTER ****
+    public List<String> getOptions() {
+        return options;
+    }
+
+//***** SETTER ****
 
     public void setType(Type type) {
         this.type = type;
@@ -66,10 +69,7 @@ public class Question <T>{
             this.predicate=predicate;
         this.predicate= this.predicate.and(predicate);
     }
-
-
-
-
-
-
+    public void addAnswerOptions(String option) {
+        options.add(option);
+    }
 }
