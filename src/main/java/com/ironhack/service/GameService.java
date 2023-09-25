@@ -12,7 +12,8 @@ import java.util.*;
 
 public class GameService {
 
-
+    private Team teamOne=new Team();
+    private Team teamTwo=new Team();
     private final static int numberOfCharactersByTeam = 3;
     private static Locale idiomaActual = new Locale("es", "ES");
     //    private static Locale idiomaEnglish = Locale.ENGLISH;
@@ -22,20 +23,27 @@ public class GameService {
 
     static List<Statistics> statisticsList = new ArrayList<>();
 
+    public GameService() {
+    }
 
-    public static void setUpGame() {
-        Team teamOne, teamTwo;
+    public GameService(Team teamOne, Team teamTwo) {
+        this.teamOne = teamOne;
+        this.teamTwo = teamTwo;
+    }
 
+    public void setUpGame() {
+//        Team teamOne, teamTwo;
 
-        Console.clear();
-        System.out.println(Titles.warriorsWizards());
+//
+//        Console.clear();
+//        System.out.println(Titles.warriorsWizards());
 
         //Creates the teams
-        teamOne = new Team("Team A");
-        teamTwo = new Team("Team B");
+//        teamOne = new Team("Team A");
+//        teamTwo = new Team("Team B");
 
         //Create questions
-        createQuestions();
+//        createQuestions();
 
         fillTeamCustomized(teamOne);
 
@@ -53,26 +61,9 @@ public class GameService {
         fight(teamOne, teamTwo);
     }
 
-    private static void createQuestions() {
-        //Stores the questions, type of the answer(String or Integer)
-        // and messages for bad answers and predicates in Question class
 
-        Question<String> name = new Question<>("inputName", Type.STRING);
-        name.addPredicate(word -> word.length() > 0);
-        name.addPredicate(word -> word.length() <= 10);
-        name.setErrorMessage("NameLengthBetween0and10");
-        questionList.add(name);
 
-        Question<Integer> optionPlayer = new Question<>("optionPlayer", Type.INTEGER);
-
-        optionPlayer.addPredicate(option -> option > 0);
-        optionPlayer.addPredicate(option -> option <= 3);
-        optionPlayer.setErrorMessage("InputANumberBetweenTheValues");
-        questionList.add(optionPlayer);
-
-    }
-
-    private static void fillTeamCustomized(Team teamOne) {
+    public  void fillTeamCustomized(Team teamOne) {
 
 
         for (int i = 0; i < numberOfCharactersByTeam; i++) {

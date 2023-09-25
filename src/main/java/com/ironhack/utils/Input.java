@@ -24,6 +24,10 @@ public class Input {
         return scanner.nextLine();
     }
 
+    public static void printOption(String key) {
+        print(VERDE,mensajes.getString(key));
+    }
+
     public static String getInput(Question question) {
 
         String answer="";
